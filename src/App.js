@@ -1,4 +1,4 @@
-import { useMenu } from './menu';
+import { useMenu, useWorkDays } from './menu';
 import React from 'react';
 import moment from 'moment';
 import 'moment/locale/ru';
@@ -8,14 +8,15 @@ moment().locale('ru');
 console.log(moment.locale());
 
 function App() {
-	const today = moment();
-	const tomorrow = moment().add(1, 'day');
+	const days = useWorkDays(moment(), 10);
 	return (
 		<div>
-			<h2>Сегодня {today.format('dddd')}</h2>
-			<Day dt={today} />
-			<h2>Завтра {tomorrow.format('dddd')}</h2>
-			<Day dt={tomorrow} />
+			{days.map((d, idx) => (
+				<div key={idx}>
+					<h2> {d.format('dddd DD MMMM')}</h2>
+					<Day dt={d} />
+				</div>
+			))}
 		</div>
 	);
 }

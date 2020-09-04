@@ -34,13 +34,61 @@ const MENU = {
 		],
 		lunch: ['Помидор', 'Щи из свежей капусты с картофелем со сметаной', 'Плов с курицей (филе)', 'Хлеб пшеничный', 'Компот из облепихи']
 	},
-	'06': { breakfast: [], lunch: [] }
+	'06': { breakfast: [], lunch: [] },
+
+	11: {
+		breakfast: ['Каша молочная с маслом', 'Бутерброд с маслом с сыром', 'Чай с сахаром', 'Яблоко'],
+		lunch: [
+			'Помидор',
+			'Суп картофельный с маконными изделиями',
+			'Котлета куриная запеченая с маслом',
+			'Картофельное пюре на молоке с маслом',
+			'Хлеб пшеничный',
+			'Компот из кураги с вит.C'
+		]
+	},
+	12: {
+		breakfast: ['Огурец', 'Курица тушеная с морклвью (филе)', 'Гречка отварная с маслом', 'Хлеб пшеничный', 'Чай с малиной с сахаром'],
+		lunch: ['Суп крестьянский с крупой', 'Плов из говядины', 'Хлеб пшеничный', 'Компот из сухофруктов с вит.C']
+	},
+	13: {
+		breakfast: [
+			'Помидор',
+			'Голубцы ленивые запеченые',
+			'Соус Бешамель',
+			'Макароны',
+			'Хлеб пшеничный',
+			'Печенье шоколадное в инд упак',
+			'Чай с сахаром'
+		],
+		lunch: [
+			'Суп с рыбными консервами',
+			'Тефтели "Натуральные" тушеные в сметанном соусе с томатом',
+			'Картофель отварной с маслом',
+			'Хлеб пшеничный',
+			'Кисель с вит.C'
+		]
+	},
+	14: { breakfast: [], lunch: [] },
+	15: { breakfast: [], lunch: [] }
 };
 
-const START_WEEK = moment(new Date(2020, 8, 31)).isoWeek();
+const START_WEEK = moment(new Date(2020, 7, 31)).isoWeek();
+
+export const getWorkDays = (fromDt, daysCnt) => {
+	let d = moment(fromDt);
+	let result = [];
+	while (result.length < daysCnt) {
+		if (d.day() < 6 && d.day() > 0) {
+			result.push(d);
+		}
+		d = moment(d).add(1, 'day');
+	}
+	return result;
+};
 
 export const getMenu = (dt = moment()) => {
-	console.log('getMenu', dt);
+	console.log('getMenu', dt.toLocaleString(), START_WEEK, dt.isoWeek());
 	const w = (dt.isoWeek() - START_WEEK) % 4;
 	const d = dt.day();
 	console.log('w', w, 'd', d, 'w+d', '' + w + d);
@@ -49,5 +97,10 @@ export const getMenu = (dt = moment()) => {
 
 export const useMenu = dt => {
 	const retval = useMemo(() => getMenu(dt), [dt]);
+	return retval;
+};
+
+export const useWorkDays = (fromDt, daysCnt) => {
+	const retval = useMemo(() => getWorkDays(fromDt, daysCnt), [fromDt, daysCnt]);
 	return retval;
 };
