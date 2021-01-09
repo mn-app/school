@@ -239,7 +239,7 @@ export const getWorkDays = (fromDt, daysCnt) => {
 
 export const getMenu = (dt = moment()) => {
 	console.log('getMenu', dt.toLocaleString(), START_WEEK, dt.isoWeek());
-	const w = (dt.isoWeek() - START_WEEK) % 4;
+	const w = (dt.isoWeek() + 53 - START_WEEK) % 4;
 	const d = dt.day();
 	console.log('w', w, 'd', d, 'w+d', '' + w + d);
 	return MENU['' + w + d];
