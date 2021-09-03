@@ -42,21 +42,21 @@ const Day = ({ dt }) => {
 	return m && m.breakfast ? (
 		<div className='day'>
 			<div>
-				<div className='title'>Завтрак</div>
+				{/*<div className='title'>Завтрак</div>*/}
 				{m.breakfast.map((x, idx) => (
 					<div key={idx} className='name'>
 						{x}
 					</div>
 				))}
 			</div>
-			<div>
+			{/*<div>
 				<div className='title'>Обед</div>
 				{m.lunch.map((x, idx) => (
 					<div className='name' key={idx}>
 						{x}
 					</div>
 				))}
-			</div>
+				</div>*/}
 		</div>
 	) : (
 		'No data'
