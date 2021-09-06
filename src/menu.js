@@ -28,7 +28,7 @@ const MENU = {
 		breakfast: ['Сыр твердый в нарезке', 'Каша молочная', 'Чай из вишни с медом', 'Хлеб', 'Мандарин']
 	},
 	14: {
-		breakfast: ['Овощт в нарезке', 'Макароны', 'Гуляш из говядины', 'Чай с черной смородиной с сахаром', 'Хлеб']
+		breakfast: ['Овощи в нарезке', 'Макароны', 'Гуляш из говядины', 'Чай с черной смородиной с сахаром', 'Хлеб']
 	},
 	15: {
 		breakfast: ['Запеканка из творога (или сырники)', 'Соус фруктовый или ягодный', 'Чай с сахаром', 'Хлеб', 'Яблоко']
@@ -144,7 +144,8 @@ const MENU = {
 	}*/
 };
 
-const START_WEEK = moment(new Date(2020, 7, 31)).isoWeek();
+const START_WEEK = moment(new Date(2021, 7, 31)).isoWeek();
+const WEEKS_CNT = 2; //4
 
 export const getWorkDays = (fromDt, daysCnt) => {
 	let d = moment(fromDt);
@@ -160,7 +161,7 @@ export const getWorkDays = (fromDt, daysCnt) => {
 
 export const getMenu = (dt = moment()) => {
 	console.log('getMenu', dt.toLocaleString(), START_WEEK, dt.isoWeek());
-	const w = (dt.isoWeek() + 53 - START_WEEK) % 4;
+	const w = (dt.isoWeek() /*+ 53*/ - START_WEEK) % WEEKS_CNT;
 	const d = dt.day();
 	console.log('w', w, 'd', d, 'w+d', '' + w + d);
 	return MENU['' + w + d];

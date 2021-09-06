@@ -11,7 +11,7 @@ console.log(moment.locale());
 
 function App() {
 	const [diff, setDiff] = useState(0);
-	const days = useWorkDays(moment().add(diff, 'days'), 20);
+	const days = useWorkDays(moment().add(diff, 'days'), 7);
 	return (
 		<div>
 			<div className='tools'>
